@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#333">Daily SOL Flow</text>
+  
+  <!-- Axes -->
+  <line x1="60" y1="60" x2="60" y2="340" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#333" stroke-width="2"/>
+  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">0.1400</text>
+  <line x1="60" y1="60" x2="740" y2="60" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">0.1120</text>
+  <line x1="60" y1="116" x2="740" y2="116" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">0.0840</text>
+  <line x1="60" y1="172" x2="740" y2="172" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">0.0560</text>
+  <line x1="60" y1="228" x2="740" y2="228" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">0.0280</text>
+  <line x1="60" y1="284" x2="740" y2="284" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="345" text-anchor="end" font-size="12" fill="#666">0.0000</text>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Lines -->
+  <polyline points="60,339.9999980002175 740,339.99999400065246" fill="none" stroke="#10b981" stroke-width="2"/>
+  <polyline points="60,60 740,339.14365713340345" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="60" cy="339.9999980002175" r="4" fill="#10b981"/>
+  <circle cx="60" cy="60" r="4" fill="#ef4444"/>
+  <text x="60" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 60 360)">10-09</text>
+  <circle cx="740" cy="339.99999400065246" r="4" fill="#10b981"/>
+  <circle cx="740" cy="339.14365713340345" r="4" fill="#ef4444"/>
+  <text x="740" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 740 360)">10-10</text>
+  
+  <!-- Legend -->
+  <line x1="650" y1="65" x2="680" y2="65" stroke="#10b981" stroke-width="2"/>
+  <text x="685" y="70" font-size="12" fill="#666">Inflow</text>
+  
+  <line x1="650" y1="85" x2="680" y2="85" stroke="#ef4444" stroke-width="2"/>
+  <text x="685" y="90" font-size="12" fill="#666">Outflow</text>
+</svg>

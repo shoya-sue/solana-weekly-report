@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node index.js",
     "start:enhanced": "node index-enhanced.js",
+    "deploy": "node deployToPages.js",
+    "build": "npm run start:enhanced && npm run deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

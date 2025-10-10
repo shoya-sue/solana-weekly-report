@@ -1,0 +1,75 @@
+name: Generate Weekly Solana Report with GitHub Pages
+
+on:
+  schedule:
+    # Run every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: |
+        cd poc
+        npm install
+
+    - name: Generate enhanced report with charts
+      env:
+        SOLANA_RPC_ENDPOINT: ${{ secrets.SOLANA_RPC_ENDPOINT }}
+        WALLET_ADDRESSES: ${{ secrets.WALLET_ADDRESSES }}
+        DAYS_TO_FETCH: 7
+      run: |
+        cd poc
+        npm run start:enhanced
+
+    - name: Generate GitHub Pages content
+      run: |
+        cd poc
+        npm run deploy
+
+    - name: Commit reports and pages
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add poc/reports/ docs/
+        git diff --staged --quiet || (git commit -m "📊 Add weekly report for week $(date +%Y-W%V) with charts and pages" && git push)
+
+  # Optional: Deploy to GitHub Pages using Actions
+  deploy-pages:
+    needs: generate-report
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: main # Ensure we have the latest commit with reports
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './docs'
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

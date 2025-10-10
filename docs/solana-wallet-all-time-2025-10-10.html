@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Wallet Report</title>
+    <style>
+        :root {
+            --primary-color: #9333ea;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --bg-color: #f9fafb;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:hover {
+            background: #f3f4f6;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+        }
+        
+        code {
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .success {
+            color: var(--secondary-color);
+        }
+        
+        .failed {
+            color: var(--danger-color);
+        }
+        
+        .chart-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .wallet-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            td, th {
+                padding: 0.5rem;
+            }
+        }
+        
+        .nav-menu {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+            background: var(--bg-color);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .nav-menu a:hover {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="report-card">
+            <h1>Solana Wallet All-Time Report</h1></p><p>Period: 2025-10-08 ~ 2025-10-10</p><p><h2>Summary</h2></p><p><strong>Monitored Wallets</strong>: 3<br><strong>Report Type</strong>: All transactions</p><p><h3>Overall Statistics</h3></p><p><ul><li><strong>Total Transactions</strong>: 65</li><br><li><strong>Successful</strong>: 65</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000878 SOL</li><br></ul><br>---</p><p><h2>Wallet: AKJx...wwpf</h2><br>Full address: <code>AKJxiz6tLx1MBx1aje4dFYofhsteNJPyECAks5fewwpf</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 65</li><br><li><strong>Successful</strong>: 65</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000878 SOL</li><br><li><strong>Activity Period</strong>: 2025-10-08 ~ 2025-10-10</li><br></ul><br><h3>Recent Transactions (Last 10)</h3></p><p>| Status | Signature | Time | Fee (SOL) |<br>|--------|-----------|------|----------|<br>| ✅ | <a href="https://solscan.io/tx/5PNE3myNNjsNRqvj5PQeWWYzfG9bmJS6eEQwjbNKBAtPwoNsShfUJ4LaZtUmCL9CyLp3gW2Q3GWRyJpc1npDygZm" target="_blank">5PNE...ygZm</a> | 2025-10-10 03:01:51 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/2M4v7KRVxbQpzCKV6pcBTPaDysGwHEhtHQh1dxJMTNLDPjHjU3tMKiTr87FJu9v8byvemCzxeLCV4DcHoMiKMk1Y" target="_blank">2M4v...Mk1Y</a> | 2025-10-10 03:01:51 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/22nQjy469rbdQ8caoGpgitZG4xhJJwox8CrV4aX37sxHiBDFz61it9fAccFKiyrSziYrBZA51Hsj6MozXDtbNaEf" target="_blank">22nQ...NaEf</a> | 2025-10-10 03:01:51 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/3sTTrtg8D13RxdxSF3heTEQodnmBEydvWLBGA8VLppR7UC9DwwZYvQkDtPcLnxQkS8nkoPNV1DRnpnMSBry7K7yB" target="_blank">3sTT...K7yB</a> | 2025-10-10 03:01:51 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/65s74NBDMrzzcCNyV12WyafDRRaGc626C1JAhNVintVXRw6qAPxeMe837khB4T7w2ynZQbfASFt8R8XWBAfkGYWJ" target="_blank">65s7...GYWJ</a> | 2025-10-10 03:01:45 | 0.000019 |<br>| ✅ | <a href="https://solscan.io/tx/4UZXuLkMSgDkqWt2o5ZMWvqRWJAzBSTS4E2rKXfDoDAhaDu9MQciNPkW2upCZGJorzs9CgcQMDpPrH2tCofRjZbC" target="_blank">4UZX...jZbC</a> | 2025-10-09 09:56:48 | 0.000105 |<br>| ✅ | <a href="https://solscan.io/tx/2GnrD86ium1UMhBLNVcYc9AFF983XsRdtVtYBPH1j3j1C2CroHpzA2wwi7Ee5jHdj7GN7j9Twhda2gJwfXBvaU9z" target="_blank">2Gnr...aU9z</a> | 2025-10-09 09:55:55 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/5AqKtkk1ttcYZUuy4ekhNHmNfhNWShQCokbbQsHxvTEHkAC46YVJQzXdgX4u9qpL1mXR3dVFNLTg9XQhDS7QT2V8" target="_blank">5AqK...T2V8</a> | 2025-10-09 09:55:55 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/P5EreXoJs8tr2cKKneJ7khrprPSrbuAxpq7fKD16JyXBErxE65kqw8oNdoenygS4Ai1GcbKX3dVq9gVun2Mq8VM" target="_blank">P5Er...q8VM</a> | 2025-10-09 09:55:55 | 0.000005 |<br>| ✅ | <a href="https://solscan.io/tx/4w7tRcPCFnCBxevKvZygD29Q5gNud4U1cvCpmwgEfDAc6hSk4xoqox6mhMQApSR8TjD5X48ZexUyb4hAsi7zKUye" target="_blank">4w7t...KUye</a> | 2025-10-09 09:55:55 | 0.000005 |</p><p>---</p><p><h2>Wallet: BfQ9...EKdx</h2><br>Full address: <code>BfQ9o7MCjkTyR1Khh1QxfjTd1v9WSgGscki9nan7EKdx</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br>---</p><p><h2>Wallet: B3cL...8kJa</h2><br>Full address: <code>B3cLovjwQ1oyjMHPZQ7chTWtv77TCwy7VskLpUGm8kJa</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br>---</p><p><em>Report generated at: 2025-10-10T07:00:16.104Z</em><br>
+        </div>
+    </div>
+</body>
+</html>

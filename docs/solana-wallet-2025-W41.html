@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Wallet Report</title>
+    <style>
+        :root {
+            --primary-color: #9333ea;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --bg-color: #f9fafb;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:hover {
+            background: #f3f4f6;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+        }
+        
+        code {
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .success {
+            color: var(--secondary-color);
+        }
+        
+        .failed {
+            color: var(--danger-color);
+        }
+        
+        .chart-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .wallet-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            td, th {
+                padding: 0.5rem;
+            }
+        }
+        
+        .nav-menu {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+            background: var(--bg-color);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .nav-menu a:hover {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="report-card">
+            <h1>Solana Wallet Weekly Report (2025-W41)</h1></p><p>Period: 2025-10-08 ~ 2025-10-10</p><p><h2>Summary</h2></p><p><strong>Monitored Wallets</strong>: 2<br><strong>Report Type</strong>: Last 7 days</p><p><h3>Overall Statistics</h3></p><p><ul><li><strong>Total Transactions</strong>: 78</li><br><li><strong>Successful</strong>: 76</li><br><li><strong>Failed</strong>: 2</li><br><li><strong>Total Fees</strong>: 0.001343 SOL</li><br></ul><br>---</p><p><h2>Wallet: AKJx...wwpf</h2><br>Full address: <code>AKJxiz6tLx1MBx1aje4dFYofhsteNJPyECAks5fewwpf</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 65</li><br><li><strong>Successful</strong>: 65</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000878 SOL</li><br><li><strong>Activity Period</strong>: 2025-10-08 ~ 2025-10-10</li><br></ul><br><h3>Transaction Types</h3></p><p>| Type | Count |<br>|------|-------|<br>| SOL Transfer | 39 |<br>| Token Activity | 18 |<br>| Sent SOL | 4 |<br>| Token Transfer | 2 |<br>| Received SOL | 1 |<br>| Unknown | 1 |</p><p><h3>Recent Transactions (Last 15)</h3></p><p>| Status | Type | Details | Time | Balance Change | Fee (SOL) | Signature |<br>|--------|------|---------|------|----------------|-----------|----------|<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-10 03:01 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/5PNE3myNNjsNRqvj5PQeWWYzfG9bmJS6eEQwjbNKBAtPwoNsShfUJ4LaZtUmCL9CyLp3gW2Q3GWRyJpc1npDygZm" target="_blank">5PNE...ygZm</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-10 03:01 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/2M4v7KRVxbQpzCKV6pcBTPaDysGwHEhtHQh1dxJMTNLDPjHjU3tMKiTr87FJu9v8byvemCzxeLCV4DcHoMiKMk1Y" target="_blank">2M4v...Mk1Y</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-10 03:01 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/22nQjy469rbdQ8caoGpgitZG4xhJJwox8CrV4aX37sxHiBDFz61it9fAccFKiyrSziYrBZA51Hsj6MozXDtbNaEf" target="_blank">22nQ...NaEf</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-10 03:01 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/3sTTrtg8D13RxdxSF3heTEQodnmBEydvWLBGA8VLppR7UC9DwwZYvQkDtPcLnxQkS8nkoPNV1DRnpnMSBry7K7yB" target="_blank">3sTT...K7yB</a> |<br>| ✅ | Token Activity | - | 10-10 03:01 | - | 0.000019 | <a href="https://solscan.io/tx/65s74NBDMrzzcCNyV12WyafDRRaGc626C1JAhNVintVXRw6qAPxeMe837khB4T7w2ynZQbfASFt8R8XWBAfkGYWJ" target="_blank">65s7...GYWJ</a> |<br>| ✅ | Token Transfer | - | 10-09 09:56 | -0.0001 SOL | 0.000105 | <a href="https://solscan.io/tx/4UZXuLkMSgDkqWt2o5ZMWvqRWJAzBSTS4E2rKXfDoDAhaDu9MQciNPkW2upCZGJorzs9CgcQMDpPrH2tCofRjZbC" target="_blank">4UZX...jZbC</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-09 09:55 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/2GnrD86ium1UMhBLNVcYc9AFF983XsRdtVtYBPH1j3j1C2CroHpzA2wwi7Ee5jHdj7GN7j9Twhda2gJwfXBvaU9z" target="_blank">2Gnr...aU9z</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-09 09:55 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/5AqKtkk1ttcYZUuy4ekhNHmNfhNWShQCokbbQsHxvTEHkAC46YVJQzXdgX4u9qpL1mXR3dVFNLTg9XQhDS7QT2V8" target="_blank">5AqK...T2V8</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-09 09:55 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/P5EreXoJs8tr2cKKneJ7khrprPSrbuAxpq7fKD16JyXBErxE65kqw8oNdoenygS4Ai1GcbKX3dVq9gVun2Mq8VM" target="_blank">P5Er...q8VM</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-09 09:55 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/4w7tRcPCFnCBxevKvZygD29Q5gNud4U1cvCpmwgEfDAc6hSk4xoqox6mhMQApSR8TjD5X48ZexUyb4hAsi7zKUye" target="_blank">4w7t...KUye</a> |<br>| ✅ | Token Activity | - | 10-09 09:55 | - | 0.000019 | <a href="https://solscan.io/tx/5ftjL7ZGadoVHTL8gsxvvfhSc87cFzSnRcY8ndva2Jf8ztQKBUQrz3CTAJRWL5eSQpXaFx2SrAyLJ5fxyh1EYXUA" target="_blank">5ftj...YXUA</a> |<br>| ✅ | Token Activity | - | 10-09 06:55 | -0.0020 SOL | 0.000005 | <a href="https://solscan.io/tx/2iue6oSrHA7fdPeePTAGzRGUSdaE3ekHhkoW7Kk7fu6rtEuPNpfzU59BZCbYrjJGiFZrwveVaVajayCz2kwRNyV1" target="_blank">2iue...NyV1</a> |<br>| ✅ | Token Transfer | - | 10-09 06:52 | -0.0001 SOL | 0.000105 | <a href="https://solscan.io/tx/57upTXM3Vewh5WBdnBMHeXx2sZPAJBzCaDgMDaP7mdSYqvBw4RxzjzGnv7G4fZvYLbMT69FDVboamgw1Lbgfb2DV" target="_blank">57up...b2DV</a> |<br>| ✅ | Token Activity | Sent 0.0500 SOL to Hy16...ohnM | 10-09 06:52 | -0.0500 SOL | 0.000005 | <a href="https://solscan.io/tx/641oHR2jUsEFnAm9QHv33qs3cKemDL3c7yk6myPGEZC1xfXhzQQ2iREeSg1kLM41ZcCKoYrA5MwqJ4zk24P9Gv4G" target="_blank">641o...Gv4G</a> |<br>| ✅ | SOL Transfer | Sent 0.0500 SOL to 44AQ...zo6a | 10-09 06:51 | -0.0501 SOL | 0.000105 | <a href="https://solscan.io/tx/46p4vzHXEGxHdfb81p47DvazHKVuupH9Aqc7PxrTqQHHx6FZbk7dVWHajH18V1xayUKVgkWvLHzrfhuwokJN2w7u" target="_blank">46p4...2w7u</a> |</p><p>---</p><p><h2>Wallet: BgQu...QYNG</h2><br>Full address: <code>BgQuLzCx514RQFb8kwUbHVc9SBagUCmAwQxDcAJxQYNG</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 13</li><br><li><strong>Successful</strong>: 11</li><br><li><strong>Failed</strong>: 2</li><br><li><strong>Total Fees</strong>: 0.000465 SOL</li><br><li><strong>Activity Period</strong>: 2025-10-09 ~ 2025-10-10</li><br></ul><br><h3>Transaction Types</h3></p><p>| Type | Count |<br>|------|-------|<br>| SOL Transfer | 6 |<br>| Token Account Operation | 4 |<br>| Token Activity | 2 |<br>| Token Transfer | 1 |</p><p><h3>Recent Transactions (Last 13)</h3></p><p>| Status | Type | Details | Time | Balance Change | Fee (SOL) | Signature |<br>|--------|------|---------|------|----------------|-----------|----------|<br>| ✅ | Token Transfer | - | 10-10 06:25 | - | 0.000005 | <a href="https://solscan.io/tx/5uuWjqkBadKZWkrW7UkrGA2FUD5HvvpZZKWViDCEvFkD24WeUKcA4pqFZ2JEXNCGdnaVxLmhP4YPriCgdk6bM5ZR" target="_blank">5uuW...M5ZR</a> |<br>| ✅ | Token Account Operation | - | 10-10 01:16 | -0.0002 SOL | 0.000205 | <a href="https://solscan.io/tx/4hsR8m87B7cWLkG2oQaSn3NYHC8DR5FhYxwDEijELNZBFjfTV1Erc71pRMjFKw5YkjFZKKjdYtwkiQDS8DKw6qFm" target="_blank">4hsR...6qFm</a> |<br>| ✅ | Token Account Operation | - | 10-10 01:16 | -0.0002 SOL | 0.000205 | <a href="https://solscan.io/tx/5uf3mgaZqDunR3tjsKtecnSRuhQ585SR666MPCpZ1SJLL9yMSJa7K6kBcZnd6Xd927wgVJMusajxVRY4nKPvPkoB" target="_blank">5uf3...PkoB</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from 83Kk.... | 10-10 01:15 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/59PvWhUrcFSqSroePuFpGLR2moLVi1KMust4gDs1Pt7yN8Q1PXk5mGKzMRmKs61csaX3PfZYscY5ZM6ZpPNrgD1M" target="_blank">59Pv...gD1M</a> |<br>| ✅ | Token Account Operation | Sent 0.0000 SOL to 3AVi...Z6jT | 10-10 01:15 | -0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/4CKras7yAMP7HbzYaQSZjCBAF8FepGWQpoo6hNCTYHeKVTHX3ikvLhaztWuLKhDRe2SBsUDaHcqKVEzo6xQGLGLL" target="_blank">4CKr...LGLL</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-10 01:14 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/3xRJhbPZfoRBXChGN9SUwbRedJyvQNgh5JTUwstA65XAkRw8oK2dya11WvfA2mWxEZB7SCpxHLWVUoL8d5CzP8hS" target="_blank">3xRJ...P8hS</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-10 01:14 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/5Tuns51stSZUghRyfin7rUKHK46MmA2QrVH5XJszhPYmsrT8UDV1wcLqrRQtkb7asAz8dEycsBuNYSKVuBva5sCj" target="_blank">5Tun...5sCj</a> |<br>| ✅ | Token Account Operation | Sent 0.0000 SOL to Cw8C...vLkY | 10-10 01:14 | -0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/zYrYx6kRhcwWK3dRcDUNmrrz7oosX4fnDCxwX7YQgQHLmL6P4feaNrWWqsUxRFRxh74GhtdATmYeupNmizf6W52" target="_blank">zYrY...6W52</a> |<br>| ✅ | SOL Transfer | Received 0.0000 SOL from Dj8H.... | 10-09 10:54 | +0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/3KW4gpSVHGrXGHZfTvNet2HxgM2VrdAHJHAbz1uFnYXXVuXyxzfCA55pZ17KLKLLusynVT6CYyGQpRiWBQV6mJFB" target="_blank">3KW4...mJFB</a> |<br>| ❌ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-09 10:54 | - | 0.000005 | <a href="https://solscan.io/tx/4HbmCwdYTPsJnMoLeXU6rjHX4m2QFLJsCfhA12WHcsqsLEpVRuQ5c4iBsroU7g4QHmvmvGccdbMfe7PTTVKU6FQc" target="_blank">4Hbm...6FQc</a> |<br>| ❌ | SOL Transfer | Received 0.0000 SOL from FLip.... | 10-09 10:54 | - | 0.000005 | <a href="https://solscan.io/tx/386bAtdzyCcweHJPBerrJAQA4SKQ9b3UCdTowANsd9XqEpND7tnqANsD6ZndjR5fH4kMQEZQc2zn1Yk78WoyCcG2" target="_blank">386b...CcG2</a> |<br>| ✅ | Token Activity | - | 10-09 10:54 | -0.0000 SOL | 0.000005 | <a href="https://solscan.io/tx/xCanqsdJm2LpLN2c937sQ67qYzdJPSQ4k92bexAw1Nzgp4wjSDzQCSmjJ79FLVvgzctxTbtRPfQ7wumH1BU4KvQ" target="_blank">xCan...4KvQ</a> |<br>| ✅ | Token Activity | Sent 0.1400 SOL to 5Fi4...YXYV | 10-09 10:53 | -0.1400 SOL | 0.000005 | <a href="https://solscan.io/tx/CxX3GsQCZZ4X3kYX66XGfEGCJPX842N7PNi25qk3f6xE6Y5umvDEcf5ZFKa2H6oAevETjpU4j2rBar4P9eZ8Xae" target="_blank">CxX3...8Xae</a> |</p><p>---</p><p><em>Report generated at: 2025-10-10T07:06:30.488Z</em><br>
+        </div>
+    </div>
+</body>
+</html>
