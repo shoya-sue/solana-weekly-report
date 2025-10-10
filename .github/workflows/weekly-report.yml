@@ -2,8 +2,8 @@ name: Generate Weekly Solana Report
 
 on:
   schedule:
-    # Run every Monday at 00:00 UTC
-    - cron: '0 0 * * 1'
+    # Run every Saturday at 00:00 UTC (09:00 JST)
+    - cron: '0 0 * * 6'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -34,8 +34,11 @@ jobs:
         npm start
 
     - name: Commit and push report
+      env:
+        GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+        GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
       run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "${GIT_USER_EMAIL:-github-actions[bot]@users.noreply.github.com}"
+        git config --local user.name "${GIT_USER_NAME:-github-actions[bot]}"
         git add poc/reports/
         git diff --staged --quiet || (git commit -m "Add weekly report for week $(date +%Y-W%V)" && git push)
