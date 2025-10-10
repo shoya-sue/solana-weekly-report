@@ -18,6 +18,69 @@ export function generateHTMLReport(markdownContent, charts = []) {
   // Convert markdown tables to HTML
   htmlContent = convertTables(htmlContent);
 
+  // Add embedded charts at appropriate positions
+  if (charts && charts.length > 0) {
+    // Group charts by wallet
+    const activityCharts = charts.filter(c => c.filename.includes('activity-'));
+    const volumeCharts = charts.filter(c => c.filename.includes('volume-'));
+    const typeCharts = charts.filter(c => c.filename.includes('types-'));
+    
+    // Create charts HTML section
+    let chartsHTML = '<div class="charts-section"><h2>📊 Visual Analytics</h2>';
+    
+    // Add activity charts
+    if (activityCharts.length > 0) {
+      chartsHTML += '<h3>Transaction Activity</h3>';
+      activityCharts.forEach(chart => {
+        const walletId = chart.filename.match(/activity-([^.]+)/)?.[1] || '';
+        chartsHTML += `<div class="chart-container">
+          <h4>Wallet ${walletId}</h4>
+          ${chart.content}
+        </div>`;
+      });
+    }
+    
+    // Add volume flow charts
+    if (volumeCharts.length > 0) {
+      chartsHTML += '<h3>SOL Volume Flow</h3>';
+      volumeCharts.forEach(chart => {
+        const walletId = chart.filename.match(/volume-([^.]+)/)?.[1] || '';
+        chartsHTML += `<div class="chart-container">
+          <h4>Wallet ${walletId}</h4>
+          ${chart.content}
+        </div>`;
+      });
+    }
+    
+    // Add type distribution charts
+    if (typeCharts.length > 0) {
+      chartsHTML += '<h3>Transaction Types Distribution</h3>';
+      typeCharts.forEach(chart => {
+        const walletId = chart.filename.match(/types-([^.]+)/)?.[1] || '';
+        chartsHTML += `<div class="chart-container">
+          <h4>Wallet ${walletId}</h4>
+          ${chart.content}
+        </div>`;
+      });
+    }
+    
+    chartsHTML += '</div>';
+    
+    // Insert charts after the summary section or at the end
+    if (htmlContent.includes('</h2>')) {
+      // Find the position after the first major section
+      const h2Index = htmlContent.indexOf('</h2>');
+      const nextH2Index = htmlContent.indexOf('<h2', h2Index + 1);
+      if (nextH2Index > -1) {
+        htmlContent = htmlContent.slice(0, nextH2Index) + chartsHTML + htmlContent.slice(nextH2Index);
+      } else {
+        htmlContent = htmlContent + chartsHTML;
+      }
+    } else {
+      htmlContent = htmlContent + chartsHTML;
+    }
+  }
+
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,12 +200,48 @@ export function generateHTMLReport(markdownContent, charts = []) {
             color: var(--danger-color);
         }
         
+        .charts-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .charts-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .charts-section h3 {
+            color: var(--text-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
         .chart-container {
             margin: 2rem 0;
             text-align: center;
-            background: var(--bg-color);
-            padding: 1rem;
+            background: white;
+            padding: 1.5rem;
             border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-container h4 {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .chart-container svg {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
         }
         
         .chart-container img {

@@ -52,8 +52,25 @@ async function deployToGitHubPages() {
       const chartFiles = await fs.readdir(chartsDir).catch(() => []);
       const charts = chartFiles.length;
       
-      // Generate HTML
-      const htmlContent = generateHTMLReport(mdContent);
+      // Load SVG charts for this report if they exist
+      const reportCharts = [];
+      try {
+        const chartFiles = await fs.readdir(chartsDir);
+        for (const chartFile of chartFiles) {
+          if (chartFile.endsWith('.svg')) {
+            const svgContent = await fs.readFile(path.join(chartsDir, chartFile), 'utf8');
+            reportCharts.push({
+              filename: chartFile,
+              content: svgContent
+            });
+          }
+        }
+      } catch (error) {
+        console.log('No charts found for this report');
+      }
+      
+      // Generate HTML with embedded charts
+      const htmlContent = generateHTMLReport(mdContent, reportCharts);
       const htmlFile = mdFile.replace('.md', '.html');
       const htmlPath = path.join(docsDir, htmlFile);
       
