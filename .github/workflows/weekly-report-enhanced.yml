@@ -53,26 +53,5 @@ jobs:
         git add poc/reports/ docs/
         git diff --staged --quiet || (git commit -m "📊 Add weekly report for week $(date +%Y-W%V) with charts and pages" && git push)
 
-  # Optional: Deploy to GitHub Pages using Actions
-  deploy-pages:
-    needs: generate-report
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        ref: main # Ensure we have the latest commit with reports
-
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: './docs'
-
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+  # GitHub Pages deployment is handled automatically when docs/ folder is updated
+  # Configure Pages in Settings → Pages → Source: Deploy from branch (main, /docs)
