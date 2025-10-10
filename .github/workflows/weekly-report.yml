@@ -1,0 +1,41 @@
+name: Generate Weekly Solana Report
+
+on:
+  schedule:
+    # Run every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: |
+        cd poc
+        npm install
+
+    - name: Generate report
+      env:
+        SOLANA_RPC_ENDPOINT: ${{ secrets.SOLANA_RPC_ENDPOINT }}
+        WALLET_ADDRESSES: ${{ secrets.WALLET_ADDRESSES }}
+        DAYS_TO_FETCH: 7
+      run: |
+        cd poc
+        npm start
+
+    - name: Commit and push report
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add poc/reports/
+        git diff --staged --quiet || (git commit -m "Add weekly report for week $(date +%Y-W%V)" && git push)
