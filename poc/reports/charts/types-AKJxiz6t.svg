@@ -4,32 +4,16 @@
   
   <!-- Title -->
   <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Transaction Types</text>
-  <!-- SOL Transfer: 43 (66.2%) -->
-  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 86.73760865046386 270.3520325474843 Z" 
+  <!-- SOL Transfer: 4 (80.0%) -->
+  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 73.19246449397951 158.7977340833403 Z" 
         fill="#10b981" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="281.5703497118084" y="245.35845190264322" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">66%</text>
-  <!-- Unknown: 14 (21.5%) -->
-  <path d="M 200 200 L 86.73760865046386 270.3520325474843 A 133.33333333333334 133.33333333333334 0 0 1 106.86515130014172 104.5868052341172 Z" 
+  <text x="254.85995688063082" y="275.5082528083284" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">80%</text>
+  <!-- Unknown: 1 (20.0%) -->
+  <path d="M 200 200 L 73.19246449397951 158.7977340833403 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
         fill="#3b82f6" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="107.3471717508483" y="188.7499098428365" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">22%</text>
-  <!-- Sent SOL: 5 (7.7%) -->
-  <path d="M 200 200 L 106.86515130014172 104.5868052341172 A 133.33333333333334 133.33333333333334 0 0 1 161.87390954684153 72.23388945211113 Z" 
-        fill="#f59e0b" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="152.68374697739824" y="119.54949775786207" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">8%</text>
-  <!-- Token Transfer: 2 (3.1%) -->
-  <path d="M 200 200 L 161.87390954684153 72.23388945211113 A 133.33333333333334 133.33333333333334 0 0 1 187.13147721139805 67.28911537098017 Z" 
-        fill="#ef4444" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <!-- Received SOL: 1 (1.5%) -->
-  <path d="M 200 200 L 187.13147721139805 67.28911537098017 A 133.33333333333334 133.33333333333334 0 0 1 200.00000000000009 66.66666666666666 Z" 
-        fill="#8b5cf6" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="145.14004311936918" y="124.49174719167158" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">20%</text>
   <rect x="20" y="80" width="15" height="15" fill="#10b981" opacity="0.8"/>
-  <text x="40" y="92" font-size="11" fill="#666">SOL Transfer (43, 66.2%)</text>
+  <text x="40" y="92" font-size="11" fill="#666">SOL Transfer (4, 80.0%)</text>
   <rect x="20" y="100" width="15" height="15" fill="#3b82f6" opacity="0.8"/>
-  <text x="40" y="112" font-size="11" fill="#666">Unknown (14, 21.5%)</text>
-  <rect x="20" y="120" width="15" height="15" fill="#f59e0b" opacity="0.8"/>
-  <text x="40" y="132" font-size="11" fill="#666">Sent SOL (5, 7.7%)</text>
-  <rect x="20" y="140" width="15" height="15" fill="#ef4444" opacity="0.8"/>
-  <text x="40" y="152" font-size="11" fill="#666">Token Transfer (2, 3.1%)</text>
-  <rect x="20" y="160" width="15" height="15" fill="#8b5cf6" opacity="0.8"/>
-  <text x="40" y="172" font-size="11" fill="#666">Received SOL (1, 1.5%)</text>
+  <text x="40" y="112" font-size="11" fill="#666">Unknown (1, 20.0%)</text>
 </svg>
