@@ -4,28 +4,16 @@
   
   <!-- Title -->
   <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Transaction Types</text>
-  <!-- SOL Transfer: 6 (54.5%) -->
-  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 162.4356590878094 327.932396481933 Z" 
+  <!-- SOL Transfer: 4 (80.0%) -->
+  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 73.19246449397951 158.7977340833403 Z" 
         fill="#10b981" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="292.3833345755537" y="213.28271823883992" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">55%</text>
-  <!-- Unknown: 3 (27.3%) -->
-  <path d="M 200 200 L 162.4356590878094 327.932396481933 A 133.33333333333334 133.33333333333334 0 0 1 78.7157339527308 144.6113315997486 Z" 
+  <text x="254.85995688063082" y="275.5082528083284" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">80%</text>
+  <!-- Unknown: 1 (20.0%) -->
+  <path d="M 200 200 L 73.19246449397951 158.7977340833403 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
         fill="#3b82f6" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="115.10101376691163" y="238.77206788017608" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">27%</text>
-  <!-- Sent SOL: 1 (9.1%) -->
-  <path d="M 200 200 L 78.7157339527308 144.6113315997486 A 133.33333333333334 133.33333333333334 0 0 1 127.9145576725869 87.83286228917589 Z" 
-        fill="#f59e0b" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="129.4633730602692" y="138.87966483177343" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">9%</text>
-  <!-- NFT Operation: 1 (9.1%) -->
-  <path d="M 200 200 L 127.9145576725869 87.83286228917589 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999986 66.66666666666666 Z" 
-        fill="#ef4444" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="173.70496136146647" y="110.44732246264694" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">9%</text>
+  <text x="145.14004311936918" y="124.49174719167158" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">20%</text>
   <rect x="20" y="80" width="15" height="15" fill="#10b981" opacity="0.8"/>
-  <text x="40" y="92" font-size="11" fill="#666">SOL Transfer (6, 54.5%)</text>
+  <text x="40" y="92" font-size="11" fill="#666">SOL Transfer (4, 80.0%)</text>
   <rect x="20" y="100" width="15" height="15" fill="#3b82f6" opacity="0.8"/>
-  <text x="40" y="112" font-size="11" fill="#666">Unknown (3, 27.3%)</text>
-  <rect x="20" y="120" width="15" height="15" fill="#f59e0b" opacity="0.8"/>
-  <text x="40" y="132" font-size="11" fill="#666">Sent SOL (1, 9.1%)</text>
-  <rect x="20" y="140" width="15" height="15" fill="#ef4444" opacity="0.8"/>
-  <text x="40" y="152" font-size="11" fill="#666">NFT Operation (1, 9.1%)</text>
+  <text x="40" y="112" font-size="11" fill="#666">Unknown (1, 20.0%)</text>
 </svg>
