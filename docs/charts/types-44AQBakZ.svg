@@ -4,16 +4,16 @@
   
   <!-- Title -->
   <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Transaction Types</text>
-  <!-- SOL Transfer: 4 (80.0%) -->
-  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 73.19246449397951 158.7977340833403 Z" 
+  <!-- Unknown: 2 (50.0%) -->
+  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 0 1 200 333.33333333333337 Z" 
         fill="#10b981" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="254.85995688063082" y="275.5082528083284" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">80%</text>
-  <!-- Unknown: 1 (20.0%) -->
-  <path d="M 200 200 L 73.19246449397951 158.7977340833403 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
+  <text x="293.3333333333333" y="200" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">50%</text>
+  <!-- SOL Transfer: 2 (50.0%) -->
+  <path d="M 200 200 L 200 333.33333333333337 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
         fill="#3b82f6" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="145.14004311936918" y="124.49174719167158" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">20%</text>
+  <text x="106.66666666666667" y="200" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">50%</text>
   <rect x="20" y="80" width="15" height="15" fill="#10b981" opacity="0.8"/>
-  <text x="40" y="92" font-size="11" fill="#666">SOL Transfer (4, 80.0%)</text>
+  <text x="40" y="92" font-size="11" fill="#666">Unknown (2, 50.0%)</text>
   <rect x="20" y="100" width="15" height="15" fill="#3b82f6" opacity="0.8"/>
-  <text x="40" y="112" font-size="11" fill="#666">Unknown (1, 20.0%)</text>
+  <text x="40" y="112" font-size="11" fill="#666">SOL Transfer (2, 50.0%)</text>
 </svg>
