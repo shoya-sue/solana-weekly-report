@@ -12,15 +12,15 @@
   <line x1="60" y1="340" x2="740" y2="340" stroke="#333" stroke-width="2"/>
   
   <!-- Y-axis labels -->
-  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">4</text>
+  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">2</text>
   <line x1="60" y1="60" x2="740" y2="60" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
-  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">3</text>
+  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">2</text>
   <line x1="60" y1="116" x2="740" y2="116" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
-  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">2</text>
+  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">1</text>
   <line x1="60" y1="172" x2="740" y2="172" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
-  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">2</text>
+  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">1</text>
   <line x1="60" y1="228" x2="740" y2="228" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
-  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">1</text>
+  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">0</text>
   <line x1="60" y1="284" x2="740" y2="284" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
   <text x="50" y="345" text-anchor="end" font-size="12" fill="#666">0</text>
   <line x1="60" y1="340" x2="740" y2="340" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
@@ -28,8 +28,8 @@
   <!-- Bars -->
   <!-- Bar 0 -->
   <rect x="80" y="60" width="50" height="280" fill="#10b981" opacity="0.8"/>
-  <text x="105" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 105 360)">11-06</text>
-  <text x="105" y="55" text-anchor="middle" font-size="10" fill="#333">4</text>
+  <text x="105" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 105 360)">11-14</text>
+  <text x="105" y="55" text-anchor="middle" font-size="10" fill="#333">2</text>
   
   <!-- Legend -->
   <rect x="650" y="60" width="15" height="15" fill="#10b981" opacity="0.8"/>
