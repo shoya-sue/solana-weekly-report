@@ -4,16 +4,22 @@
   
   <!-- Title -->
   <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Transaction Types</text>
-  <!-- Unknown: 2 (50.0%) -->
-  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 0 1 200 333.33333333333337 Z" 
+  <!-- SOL Transfer: 8 (57.1%) -->
+  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 142.14883478432563 320.12918238698927 Z" 
         fill="#10b981" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="293.3333333333333" y="200" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">50%</text>
-  <!-- SOL Transfer: 2 (50.0%) -->
-  <path d="M 200 200 L 200 333.33333333333337 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
+  <text x="290.99327180363684" y="220.76862050258933" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">57%</text>
+  <!-- Unknown: 5 (35.7%) -->
+  <path d="M 200 200 L 142.14883478432563 320.12918238698927 A 133.33333333333334 133.33333333333334 0 0 1 142.14883478432557 79.87081761301079 Z" 
         fill="#3b82f6" opacity="0.8" stroke="#fff" stroke-width="2"/>
-  <text x="106.66666666666667" y="200" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">50%</text>
+  <text x="106.66666666666667" y="200" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">36%</text>
+  <!-- Received SOL: 1 (7.1%) -->
+  <path d="M 200 200 L 142.14883478432557 79.87081761301079 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
+        fill="#f59e0b" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="179.23137949741056" y="109.00672819636316" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">7%</text>
   <rect x="20" y="80" width="15" height="15" fill="#10b981" opacity="0.8"/>
-  <text x="40" y="92" font-size="11" fill="#666">Unknown (2, 50.0%)</text>
+  <text x="40" y="92" font-size="11" fill="#666">SOL Transfer (8, 57.1%)</text>
   <rect x="20" y="100" width="15" height="15" fill="#3b82f6" opacity="0.8"/>
-  <text x="40" y="112" font-size="11" fill="#666">SOL Transfer (2, 50.0%)</text>
+  <text x="40" y="112" font-size="11" fill="#666">Unknown (5, 35.7%)</text>
+  <rect x="20" y="120" width="15" height="15" fill="#f59e0b" opacity="0.8"/>
+  <text x="40" y="132" font-size="11" fill="#666">Received SOL (1, 7.1%)</text>
 </svg>
