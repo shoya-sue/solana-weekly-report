@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Wallet Report</title>
+    <style>
+        :root {
+            --primary-color: #9333ea;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --bg-color: #f9fafb;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:hover {
+            background: #f3f4f6;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+        }
+        
+        code {
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .success {
+            color: var(--secondary-color);
+        }
+        
+        .failed {
+            color: var(--danger-color);
+        }
+        
+        .charts-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .charts-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .charts-section h3 {
+            color: var(--text-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .chart-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-container h4 {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .chart-container svg {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .wallet-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            td, th {
+                padding: 0.5rem;
+            }
+        }
+        
+        .nav-menu {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .nav-menu a {
+            padding: 0.5rem 1rem;
+            background: var(--bg-color);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .nav-menu a:hover {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="report-card">
+            <h1>Solana Wallet Weekly Report (2026-W3)</h1></p><p><h2>Summary</h2></p><p><strong>Monitored Wallets</strong>: 5<br><strong>Report Type</strong>: Last 7 days</p><p><h3>Overall Statistics</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br>---</p><p><div class="charts-section"><h2>📊 Visual Analytics</h2><h3>Transaction Activity</h3><div class="chart-container">
+          <h4>Wallet 44AQBakZ</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#333">Activity - 44AQBakZ</text>
+  
+  <!-- Y-axis -->
+  <line x1="60" y1="60" x2="60" y2="340" stroke="#333" stroke-width="2"/>
+  
+  <!-- X-axis -->
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#333" stroke-width="2"/>
+  
+  <!-- Y-axis labels -->
+  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">21</text>
+  <line x1="60" y1="60" x2="740" y2="60" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">17</text>
+  <line x1="60" y1="116" x2="740" y2="116" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">13</text>
+  <line x1="60" y1="172" x2="740" y2="172" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">8</text>
+  <line x1="60" y1="228" x2="740" y2="228" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">4</text>
+  <line x1="60" y1="284" x2="740" y2="284" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="345" text-anchor="end" font-size="12" fill="#666">0</text>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Bars -->
+  <!-- Bar 0 -->
+  <rect x="80" y="60" width="50" height="280" fill="#10b981" opacity="0.8"/>
+  <text x="105" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 105 360)">01-06</text>
+  <text x="105" y="55" text-anchor="middle" font-size="10" fill="#333">21</text>
+  
+  <!-- Legend -->
+  <rect x="650" y="60" width="15" height="15" fill="#10b981" opacity="0.8"/>
+  <text x="670" y="72" font-size="12" fill="#666">Success</text>
+  
+  <rect x="650" y="85" width="15" height="15" fill="#ef4444" opacity="0.8"/>
+  <text x="670" y="97" font-size="12" fill="#666">Failed</text>
+</svg>
+        </div><div class="chart-container">
+          <h4>Wallet AKJxiz6t</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#333">Activity - AKJxiz6t</text>
+  
+  <!-- Y-axis -->
+  <line x1="60" y1="60" x2="60" y2="340" stroke="#333" stroke-width="2"/>
+  
+  <!-- X-axis -->
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#333" stroke-width="2"/>
+  
+  <!-- Y-axis labels -->
+  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">18</text>
+  <line x1="60" y1="60" x2="740" y2="60" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">14</text>
+  <line x1="60" y1="116" x2="740" y2="116" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">11</text>
+  <line x1="60" y1="172" x2="740" y2="172" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">7</text>
+  <line x1="60" y1="228" x2="740" y2="228" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">4</text>
+  <line x1="60" y1="284" x2="740" y2="284" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="345" text-anchor="end" font-size="12" fill="#666">0</text>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Bars -->
+  <!-- Bar 0 -->
+  <rect x="80" y="231.11111111111111" width="50" height="108.88888888888889" fill="#10b981" opacity="0.8"/>
+  <text x="105" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 105 360)">01-05</text>
+  <text x="105" y="226.11111111111111" text-anchor="middle" font-size="10" fill="#333">7</text>
+  <!-- Bar 1 -->
+  <rect x="420" y="60" width="50" height="280" fill="#10b981" opacity="0.8"/>
+  <text x="445" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 445 360)">01-06</text>
+  <text x="445" y="55" text-anchor="middle" font-size="10" fill="#333">18</text>
+  
+  <!-- Legend -->
+  <rect x="650" y="60" width="15" height="15" fill="#10b981" opacity="0.8"/>
+  <text x="670" y="72" font-size="12" fill="#666">Success</text>
+  
+  <rect x="650" y="85" width="15" height="15" fill="#ef4444" opacity="0.8"/>
+  <text x="670" y="97" font-size="12" fill="#666">Failed</text>
+</svg>
+        </div><h3>SOL Volume Flow</h3><div class="chart-container">
+          <h4>Wallet 44AQBakZ</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#333">Daily SOL Flow</text>
+  
+  <!-- Axes -->
+  <line x1="60" y1="60" x2="60" y2="340" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#333" stroke-width="2"/>
+  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">0.0010</text>
+  <line x1="60" y1="60" x2="740" y2="60" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">0.0008</text>
+  <line x1="60" y1="116" x2="740" y2="116" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">0.0006</text>
+  <line x1="60" y1="172" x2="740" y2="172" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">0.0004</text>
+  <line x1="60" y1="228" x2="740" y2="228" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">0.0002</text>
+  <line x1="60" y1="284" x2="740" y2="284" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="345" text-anchor="end" font-size="12" fill="#666">0.0000</text>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Lines -->
+  <polyline points="60,339.99888" fill="none" stroke="#10b981" stroke-width="2"/>
+  <polyline points="60,340" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="60" cy="339.99888" r="4" fill="#10b981"/>
+  <circle cx="60" cy="340" r="4" fill="#ef4444"/>
+  <text x="60" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 60 360)">01-06</text>
+  
+  <!-- Legend -->
+  <line x1="650" y1="65" x2="680" y2="65" stroke="#10b981" stroke-width="2"/>
+  <text x="685" y="70" font-size="12" fill="#666">Inflow</text>
+  
+  <line x1="650" y1="85" x2="680" y2="85" stroke="#ef4444" stroke-width="2"/>
+  <text x="685" y="90" font-size="12" fill="#666">Outflow</text>
+</svg>
+        </div><div class="chart-container">
+          <h4>Wallet AKJxiz6t</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#333">Daily SOL Flow</text>
+  
+  <!-- Axes -->
+  <line x1="60" y1="60" x2="60" y2="340" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#333" stroke-width="2"/>
+  <text x="50" y="65" text-anchor="end" font-size="12" fill="#666">0.4409</text>
+  <line x1="60" y1="60" x2="740" y2="60" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="121" text-anchor="end" font-size="12" fill="#666">0.3527</text>
+  <line x1="60" y1="116" x2="740" y2="116" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="177" text-anchor="end" font-size="12" fill="#666">0.2645</text>
+  <line x1="60" y1="172" x2="740" y2="172" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="233" text-anchor="end" font-size="12" fill="#666">0.1763</text>
+  <line x1="60" y1="228" x2="740" y2="228" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="289" text-anchor="end" font-size="12" fill="#666">0.0882</text>
+  <line x1="60" y1="284" x2="740" y2="284" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  <text x="50" y="345" text-anchor="end" font-size="12" fill="#666">0.0000</text>
+  <line x1="60" y1="340" x2="740" y2="340" stroke="#e0e0e0" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Lines -->
+  <polyline points="60,60 740,339.9999961893028" fill="none" stroke="#10b981" stroke-width="2"/>
+  <polyline points="60,338.69783395388646 740,333.648837982551" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="60" cy="60" r="4" fill="#10b981"/>
+  <circle cx="60" cy="338.69783395388646" r="4" fill="#ef4444"/>
+  <text x="60" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 60 360)">01-05</text>
+  <circle cx="740" cy="339.9999961893028" r="4" fill="#10b981"/>
+  <circle cx="740" cy="333.648837982551" r="4" fill="#ef4444"/>
+  <text x="740" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 740 360)">01-06</text>
+  
+  <!-- Legend -->
+  <line x1="650" y1="65" x2="680" y2="65" stroke="#10b981" stroke-width="2"/>
+  <text x="685" y="70" font-size="12" fill="#666">Inflow</text>
+  
+  <line x1="650" y1="85" x2="680" y2="85" stroke="#ef4444" stroke-width="2"/>
+  <text x="685" y="90" font-size="12" fill="#666">Outflow</text>
+</svg>
+        </div><h3>Transaction Types Distribution</h3><div class="chart-container">
+          <h4>Wallet 44AQBakZ</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Transaction Types</text>
+  <!-- Unknown: 17 (81.0%) -->
+  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 1 1 75.88350018077277 151.28786341781392 Z" 
+        fill="#10b981" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="252.5765387526047" y="277.11561893615954" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">81%</text>
+  <!-- SOL Transfer: 4 (19.0%) -->
+  <path d="M 200 200 L 75.88350018077277 151.28786341781392 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
+        fill="#3b82f6" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="147.4234612473953" y="122.88438106384048" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">19%</text>
+  <rect x="20" y="80" width="15" height="15" fill="#10b981" opacity="0.8"/>
+  <text x="40" y="92" font-size="11" fill="#666">Unknown (17, 81.0%)</text>
+  <rect x="20" y="100" width="15" height="15" fill="#3b82f6" opacity="0.8"/>
+  <text x="40" y="112" font-size="11" fill="#666">SOL Transfer (4, 19.0%)</text>
+</svg>
+        </div><div class="chart-container">
+          <h4>Wallet AKJxiz6t</h4>
+          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Transaction Types</text>
+  <!-- Unknown: 11 (44.0%) -->
+  <path d="M 200 200 L 200 66.66666666666666 A 133.33333333333334 133.33333333333334 0 0 1 249.0832736912904 323.97019811843353 Z" 
+        fill="#10b981" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="291.68014340134425" y="182.51107730533238" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">44%</text>
+  <!-- SOL Transfer: 10 (40.0%) -->
+  <path d="M 200 200 L 249.0832736912904 323.97019811843353 A 133.33333333333334 133.33333333333334 0 0 1 87.42294326639797 128.55642733613382 Z" 
+        fill="#3b82f6" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="128.08543067425967" y="259.49290570987773" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">40%</text>
+  <!-- Token Account Operation: 3 (12.0%) -->
+  <path d="M 200 200 L 87.42294326639797 128.55642733613382 A 133.33333333333334 133.33333333333334 0 0 1 166.8413483780193 70.85557851618253 Z" 
+        fill="#f59e0b" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <text x="145.14004311936918" y="124.49174719167158" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">12%</text>
+  <!-- Sent SOL: 1 (4.0%) -->
+  <path d="M 200 200 L 166.8413483780193 70.85557851618253 A 133.33333333333334 133.33333333333334 0 0 1 199.99999999999997 66.66666666666666 Z" 
+        fill="#ef4444" opacity="0.8" stroke="#fff" stroke-width="2"/>
+  <rect x="20" y="80" width="15" height="15" fill="#10b981" opacity="0.8"/>
+  <text x="40" y="92" font-size="11" fill="#666">Unknown (11, 44.0%)</text>
+  <rect x="20" y="100" width="15" height="15" fill="#3b82f6" opacity="0.8"/>
+  <text x="40" y="112" font-size="11" fill="#666">SOL Transfer (10, 40.0%)</text>
+  <rect x="20" y="120" width="15" height="15" fill="#f59e0b" opacity="0.8"/>
+  <text x="40" y="132" font-size="11" fill="#666">Token Account Operation (3, 12.0%)</text>
+  <rect x="20" y="140" width="15" height="15" fill="#ef4444" opacity="0.8"/>
+  <text x="40" y="152" font-size="11" fill="#666">Sent SOL (1, 4.0%)</text>
+</svg>
+        </div></div><h2>Wallet: B3cL...8kJa</h2><br>Full address: <code>B3cLovjwQ1oyjMHPZQ7chTWtv77TCwy7VskLpUGm8kJa</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br><h3>📈 Charts for this wallet</h3></p><p><ul><li><a href="./charts/activity-B3cLovjw.svg" target="_blank">Activity Chart</a></li><br><li><a href="./charts/volume-B3cLovjw.svg" target="_blank">Volume Flow Chart</a></li><br><li><a href="./charts/types-B3cLovjw.svg" target="_blank">Transaction Types</a></li><br></ul><br>---</p><p><h2>Wallet: B3cL...8kJa</h2><br>Full address: <code>B3cLovjwQ1oyjMHPZQ7chTWtv77TCwy7VskLpUGm8kJa</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br><h3>📈 Charts for this wallet</h3></p><p><ul><li><a href="./charts/activity-B3cLovjw.svg" target="_blank">Activity Chart</a></li><br><li><a href="./charts/volume-B3cLovjw.svg" target="_blank">Volume Flow Chart</a></li><br><li><a href="./charts/types-B3cLovjw.svg" target="_blank">Transaction Types</a></li><br></ul><br>---</p><p><h2>Wallet: AKJx...wwpf</h2><br>Full address: <code>AKJxiz6tLx1MBx1aje4dFYofhsteNJPyECAks5fewwpf</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br><h3>📈 Charts for this wallet</h3></p><p><ul><li><a href="./charts/activity-AKJxiz6t.svg" target="_blank">Activity Chart</a></li><br><li><a href="./charts/volume-AKJxiz6t.svg" target="_blank">Volume Flow Chart</a></li><br><li><a href="./charts/types-AKJxiz6t.svg" target="_blank">Transaction Types</a></li><br></ul><br>---</p><p><h2>Wallet: BfQ9...EKdx</h2><br>Full address: <code>BfQ9o7MCjkTyR1Khh1QxfjTd1v9WSgGscki9nan7EKdx</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br><h3>📈 Charts for this wallet</h3></p><p><ul><li><a href="./charts/activity-BfQ9o7MC.svg" target="_blank">Activity Chart</a></li><br><li><a href="./charts/volume-BfQ9o7MC.svg" target="_blank">Volume Flow Chart</a></li><br><li><a href="./charts/types-BfQ9o7MC.svg" target="_blank">Transaction Types</a></li><br></ul><br>---</p><p><h2>Wallet: 44AQ...zo6a</h2><br>Full address: <code>44AQBakZ9btB4WaQ9wBqBwxVm9fDeBzHeHbrtxWzzo6a</code></p><p><h3>Summary</h3></p><p><ul><li><strong>Total Transactions</strong>: 0</li><br><li><strong>Successful</strong>: 0</li><br><li><strong>Failed</strong>: 0</li><br><li><strong>Total Fees</strong>: 0.000000 SOL</li><br></ul><br><h3>📈 Charts for this wallet</h3></p><p><ul><li><a href="./charts/activity-44AQBakZ.svg" target="_blank">Activity Chart</a></li><br><li><a href="./charts/volume-44AQBakZ.svg" target="_blank">Volume Flow Chart</a></li><br><li><a href="./charts/types-44AQBakZ.svg" target="_blank">Transaction Types</a></li><br></ul><br>---</p><p><em>Report generated at: 2026-01-17T00:13:06.106Z</em><br><em>Enhanced with token recognition and charts</em><br>
+        </div>
+    </div>
+</body>
+</html>
