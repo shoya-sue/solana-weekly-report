@@ -29,7 +29,7 @@
   <!-- Bar 0 -->
   <rect x="80" y="340" width="50" height="0" fill="#10b981" opacity="0.8"/>
   <rect x="80" y="60" width="50" height="280" fill="#ef4444" opacity="0.8"/>
-  <text x="105" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 105 360)">08-21</text>
+  <text x="105" y="360" text-anchor="middle" font-size="10" fill="#666" transform="rotate(-45 105 360)">08-29</text>
   <text x="105" y="55" text-anchor="middle" font-size="10" fill="#333">1</text>
   
   <!-- Legend -->
